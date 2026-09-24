@@ -114,7 +114,7 @@ Dynamic recruitment information lives on the child status row. This makes status
 
 See [`docs/data-model.md`](docs/data-model.md) for the complete schema.
 
-## Design decisions
+## Design Principles
 
 ### Central database instead of one note per application
 
