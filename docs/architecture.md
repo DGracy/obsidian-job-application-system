@@ -13,7 +13,7 @@ A hybrid architecture is used rather than creating one note for every job.
 
 ### Central application log
 
-`03 Work/Application Log.md` is the single source of truth for:
+`03 Work/Application Database.md` is the single source of truth for:
 
 - application identity
 - company / role metadata
