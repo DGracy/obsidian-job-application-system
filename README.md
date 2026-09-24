@@ -49,8 +49,8 @@ The central log is the single source of truth for status and deadlines. Detail n
         └── Job Search/
             ├── 00 Dashboard/
             │   ├── Overview.md
-            │   ├── UK 求职看板.md
-            │   └── CN 求职看板.md
+            │   ├── Applications - UK.md
+            │   └── Applications - China.md
             ├── 01 Applications/
             │   ├── 2026-09-10 - Northstar Analytics - Graduate Data Analyst.md
             │   └── 2026-09-12 - HarborCart - Product Intern.md
