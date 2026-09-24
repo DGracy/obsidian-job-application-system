@@ -2,7 +2,7 @@
 
 A metadata-driven job application workflow built with **Obsidian**, **QuickAdd**, **Dataview**, and **JavaScript**.
 
-The system is designed for high-volume job searching without creating one note for every application. A central structured log stores application metadata and recruitment status, while dedicated detail notes are created only for high-priority roles, assessments, interviews, or applications that require deeper preparation.
+The system is designed for high-volume job searching without creating one note for every application. A central application database stores structured metadata and recruitment status, while dedicated detail notes are created only for high-priority roles, assessments, interviews, or applications that require deeper preparation.
 
 ## What it does
 
@@ -21,17 +21,17 @@ The system is designed for high-volume job searching without creating one note f
 
 ```mermaid
 flowchart TD
-    A[QuickAdd: Add Application] --> C[Central Application Log]
+    A[QuickAdd: Add Application] --> C[Application Database]
     B[QuickAdd: Update Application] --> C
     C --> D[Overview Dashboard]
-    C --> E[UK Dashboard]
-    C --> F[China Dashboard]
+    C --> E[Applications - UK]
+    C --> F[Applications - China]
     A -->|optional| G[Application Detail Notes]
     B -->|assessment / interview, optional| G
     C -->|detail link| G
 ```
 
-The central log is the single source of truth for status and deadlines. Detail notes deliberately do **not** duplicate live recruitment status.
+The Application Database is the single source of truth for status and deadlines. The UK and China dashboards are example country-specific views, and detail notes deliberately do **not** duplicate live recruitment status.
 
 ## Repository layout
 
@@ -108,9 +108,9 @@ See [`docs/data-model.md`](docs/data-model.md) for the complete schema.
 
 ## Design decisions
 
-### Central log instead of one note per application
+### Central database instead of one note per application
 
-High-volume job searching can generate dozens of low-value notes. The central log keeps entry and scanning fast while remaining queryable through Dataview.
+High-volume job searching can generate dozens of low-value notes. The Application Database keeps entry and scanning fast while remaining queryable through Dataview.
 
 ### Selective detail notes
 
@@ -135,7 +135,7 @@ Generate application ID
         ↓
 Duplicate check
         ↓
-Write central log
+Write Application Database
         ↓
 Optional detail page
 
