@@ -44,27 +44,17 @@ Application detail notes are optional and deliberately do **not** duplicate live
 ## Repository layout
 
 ```text
-.
-├── README.md
-├── LICENSE
-├── .gitignore
-├── docs/
-│   ├── architecture.md
-│   └── data-model.md
-└── example-vault/
-    └── 03 Work/
-        ├── Application Database.md
-        └── Job Search/
-            ├── 00 Dashboard/
-            │   ├── Overview.md
-            │   ├── Applications - UK.md
-            │   └── Applications - China.md
-            ├── 01 Applications/
-            │   ├── 2026-09-10 - Northstar Analytics - Graduate Data Analyst.md
-            │   └── 2026-09-12 - HarborCart - Product Intern.md
-            └── 02 Scripts/
-                ├── add-application.js
-                └── update-application.js
+03 Work/
+├── Application Database.md
+└── Job Search/
+    ├── 00 Dashboard/
+    │   ├── Overview.md
+    │   ├── Applications - UK.md
+    │   └── Applications - China.md
+    ├── 01 Applications/
+    └── 02 Scripts/
+        ├── add-application.js
+        └── update-application.js
 ```
 
 All application data in this repository is fictional demo data.
@@ -131,33 +121,6 @@ Updates target an application ID rather than relying on company + role text. Thi
 ### Status history without duplicating state
 
 The current status is stored once, while each change is appended to the process history for traceability.
-
-## Example workflow
-
-```text
-QuickAdd: Add Application
-        ↓
-Collect market / company / role / source / metadata
-        ↓
-Generate application ID
-        ↓
-Duplicate check
-        ↓
-Write Application Database
-        ↓
-Optional detail page
-
-QuickAdd: Update Application
-        ↓
-Select by application ID
-        ↓
-Update status + deadline
-        ↓
-Append process history
-        ↓
-If assessment/interview and no detail note:
-offer to create one
-```
 
 ## Privacy
 
