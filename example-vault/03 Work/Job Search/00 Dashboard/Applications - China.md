@@ -1,6 +1,6 @@
 # 🇨🇳 中国求职看板
 
-> 数据来源：[[03 Work/Application Log|Application Log]]
+> 数据来源：[[03 Work/Application Database|Application Log]]
 
 ## ⏰ 近期截止
 
@@ -13,7 +13,7 @@ P.priority AS "优先级",
 dateformat(S.deadline, "yyyy.MM.dd") AS "截止日期",
 choice(P.detail, P.detail, "-") AS "详情"
 FLATTEN file.lists AS S
-WHERE file.name = "Application Log" AND S.status
+WHERE file.name = "Application Database" AND S.status
 FLATTEN filter(file.lists, (P) => P.line = S.parent) AS P
 WHERE P.company AND P.country = "China"
 AND S.deadline
@@ -36,7 +36,7 @@ choice(S.deadline, dateformat(S.deadline, "yyyy.MM.dd"), "-") AS "截止日期",
 P.priority AS "优先级",
 choice(P.detail, P.detail, "-") AS "详情"
 FLATTEN file.lists AS S
-WHERE file.name = "Application Log" AND S.status
+WHERE file.name = "Application Database" AND S.status
 FLATTEN filter(file.lists, (P) => P.line = S.parent) AS P
 WHERE P.company AND P.country = "China"
 AND (S.status = "Online Test" OR S.status = "Interview 1" OR S.status = "Interview 2" OR S.status = "Interview 3")
@@ -58,7 +58,7 @@ choice(P.applied, dateformat(P.applied, "yyyy.MM.dd"), "-") AS "投递日期",
 S.status AS "当前阶段",
 choice(S.deadline, dateformat(S.deadline, "yyyy.MM.dd"), "-") AS "截止日期"
 FLATTEN file.lists AS S
-WHERE file.name = "Application Log" AND S.status
+WHERE file.name = "Application Database" AND S.status
 FLATTEN filter(file.lists, (P) => P.line = S.parent) AS P
 WHERE P.company AND P.country = "China"
 AND S.status != "Rejected" AND S.status != "Offer" AND S.status != "Withdrawn"
@@ -79,7 +79,7 @@ P.source AS "渠道",
 choice(P.applied, dateformat(P.applied, "yyyy.MM.dd"), "-") AS "投递日期",
 choice(P.detail, P.detail, "-") AS "详情"
 FLATTEN file.lists AS S
-WHERE file.name = "Application Log" AND S.status
+WHERE file.name = "Application Database" AND S.status
 FLATTEN filter(file.lists, (P) => P.line = S.parent) AS P
 WHERE P.company AND P.country = "China" AND S.status = "Offer"
 SORT P.applied DESC
@@ -99,7 +99,7 @@ P.source AS "渠道",
 choice(P.applied, dateformat(P.applied, "yyyy.MM.dd"), "-") AS "投递日期",
 S.status AS "结果"
 FLATTEN file.lists AS S
-WHERE file.name = "Application Log" AND S.status
+WHERE file.name = "Application Database" AND S.status
 FLATTEN filter(file.lists, (P) => P.line = S.parent) AS P
 WHERE P.company AND P.country = "China"
 AND (S.status = "Rejected" OR S.status = "Withdrawn")
