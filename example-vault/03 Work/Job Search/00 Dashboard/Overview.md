@@ -10,7 +10,7 @@ Last updated: `$=dv.date("today").toFormat("yyyy.MM.dd")`
 ## Overview
 
 ```dataviewjs
-const LOG = "03 Work/Application Log";
+const LOG = "03 Work/Application Database";
 const closed = new Set(["Rejected", "Withdrawn", "Offer"]);
 const lists = dv.page(LOG).file.lists.array();
 const parents = lists.filter(p => p.company && p.role && !(p.company === "Company" && p.role === "Role"));
@@ -46,7 +46,7 @@ grid.innerHTML = html;
 ### Overdue
 
 ```dataviewjs
-const LOG = "03 Work/Application Log";
+const LOG = "03 Work/Application Database";
 const closed = new Set(["Rejected", "Withdrawn", "Offer"]);
 const today = dv.date("today").startOf("day");
 const lists = dv.page(LOG).file.lists.array();
@@ -61,7 +61,7 @@ else dv.table(["Company", "Position", "Stage", "Deadline", "Priority"], rows.map
 ### Next 7 Days
 
 ```dataviewjs
-const LOG = "03 Work/Application Log";
+const LOG = "03 Work/Application Database";
 const closed = new Set(["Rejected", "Withdrawn", "Offer"]);
 const today = dv.date("today").startOf("day"), horizon = today.plus({ days: 7 });
 const lists = dv.page(LOG).file.lists.array();
@@ -86,7 +86,7 @@ S.status AS "Stage",
 choice(S.deadline, dateformat(S.deadline, "yyyy.MM.dd"), "-") AS "Deadline",
 choice(P.detail, P.detail, "-") AS "Details"
 FLATTEN file.lists AS S
-WHERE file.name = "Application Log" AND S.status
+WHERE file.name = "Application Database" AND S.status
 FLATTEN filter(file.lists, (P) => P.line = S.parent) AS P
 WHERE P.company AND P.role
 AND P.company != "Company" AND P.role != "Role"
@@ -100,7 +100,7 @@ SORT S.deadline ASC, P.applied DESC
 ## Recruitment Pipeline
 
 ```dataviewjs
-const LOG = "03 Work/Application Log";
+const LOG = "03 Work/Application Database";
 const lists = dv.page(LOG).file.lists.array();
 const parents = lists.filter(p => p.company && p.role && !(p.company === "Company" && p.role === "Role"));
 const byLine = new Map(parents.map(p => [p.line, p]));
@@ -135,7 +135,7 @@ choice(P.applied, dateformat(P.applied, "yyyy.MM.dd"), "-") AS "Applied",
 S.status AS "Stage",
 P.priority AS "Priority"
 FLATTEN file.lists AS S
-WHERE file.name = "Application Log" AND S.status
+WHERE file.name = "Application Database" AND S.status
 FLATTEN filter(file.lists, (P) => P.line = S.parent) AS P
 WHERE P.company AND P.role
 AND P.company != "Company" AND P.role != "Role"
@@ -152,7 +152,7 @@ TABLE WITHOUT ID
 key AS "Track",
 length(rows) AS "Applications"
 FLATTEN file.lists AS S
-WHERE file.name = "Application Log" AND S.status
+WHERE file.name = "Application Database" AND S.status
 FLATTEN filter(file.lists, (P) => P.line = S.parent) AS P
 WHERE P.company AND P.role
 AND P.company != "Company" AND P.role != "Role"
@@ -174,7 +174,7 @@ choice(S.deadline, dateformat(S.deadline, "yyyy.MM.dd"), "-") AS "Deadline",
 P.priority AS "Priority",
 choice(P.detail, P.detail, "-") AS "Details"
 FLATTEN file.lists AS S
-WHERE file.name = "Application Log" AND S.status
+WHERE file.name = "Application Database" AND S.status
 FLATTEN filter(file.lists, (P) => P.line = S.parent) AS P
 WHERE P.company AND P.role
 AND P.company != "Company" AND P.role != "Role"
