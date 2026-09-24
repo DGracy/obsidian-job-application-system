@@ -23,15 +23,23 @@ The system is designed for high-volume job searching without creating one note f
 flowchart TD
     A[QuickAdd: Add Application] --> C[Application Database]
     B[QuickAdd: Update Application] --> C
+
     C --> D[Overview Dashboard]
-    C --> E[Applications - UK]
-    C --> F[Applications - China]
-    A -->|optional| G[Application Detail Notes]
-    B -->|assessment / interview, optional| G
-    C -->|detail link| G
+    C --> E[Country-Specific Dashboards]
+
+    E --> E1[Applications - UK]
+    E --> E2[Applications - China]
+
+    A -. optional .-> G[Application Detail Notes]
+    B -. assessment / interview, optional .-> G
+    C -. detail link .-> G
 ```
 
-The Application Database is the single source of truth for status and deadlines. The UK and China dashboards are example country-specific views, and detail notes deliberately do **not** duplicate live recruitment status.
+The Application Database is the single source of truth for status and deadlines.
+
+The country-specific dashboards are filtered views built on top of the same data model. The UK and China dashboards in this repository are example implementations, and the same structure can be extended to other countries or regions.
+
+Application detail notes are optional and deliberately do **not** duplicate live recruitment status.
 
 ## Repository layout
 
