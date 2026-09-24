@@ -6,7 +6,7 @@ The system is designed for high-volume job searching without creating one note f
 
 ## What it does
 
-- Unified UK / China application entry flow
+- Unified application entry workflow with country-specific fields, demonstrated for the UK and China
 - Stable application IDs for reliable updates
 - Duplicate-application warning
 - Recruitment-stage and deadline tracking
@@ -14,7 +14,7 @@ The system is designed for high-volume job searching without creating one note f
 - Optional application detail pages
 - Automatic detail-page creation when an application reaches assessment/interview stages
 - Priority, career-track, source, sponsorship, and CV-version metadata
-- Real-time Overview, UK, and China dashboards powered by Dataview
+- Real-time overview and country-specific dashboards powered by Dataview
 - Separation between structured tracking data and deeper application research
 
 ## Architecture
