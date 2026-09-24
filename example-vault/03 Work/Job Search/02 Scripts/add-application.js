@@ -7,7 +7,7 @@ module.exports = async (params) => {
   const { app, quickAddApi } = params;
 
   const CONFIG = {
-    logPath: "03 Work/Application Log.md",
+    logPath: "03 Work/Application Database.md",
     detailFolder: "03 Work/Job Search/01 Applications",
     statuses: ["Applied", "Online Test", "Interview 1", "Interview 2", "Interview 3", "Offer", "Rejected", "Withdrawn"],
     tracks: ["Data / Analytics", "Product", "Technology", "Finance / M&A", "Strategy", "Operations"],
@@ -49,7 +49,7 @@ module.exports = async (params) => {
   };
 
   let logFile = app.vault.getAbstractFileByPath(CONFIG.logPath);
-  if (!logFile) logFile = await app.vault.create(CONFIG.logPath, "# Application Log\n");
+  if (!logFile) logFile = await app.vault.create(CONFIG.logPath, "# Application Database\n");
   let log = await app.vault.read(logFile);
 
   const country = (await pick("选择投递市场", ["🇬🇧 UK", "🇨🇳 China"])) === "🇬🇧 UK" ? "UK" : "China";
