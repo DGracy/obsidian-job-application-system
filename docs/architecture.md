@@ -50,8 +50,8 @@ A hybrid architecture is used rather than creating one note for every job.
 Dataview treats the central log as a lightweight database. The dashboards are read-only views:
 
 - `Overview.md`: KPIs, deadlines, priorities, pipeline, recent applications
-- `UK 求职看板.md`: UK-specific active/closed/offer views
-- `CN 求职看板.md`: China-specific active/closed/offer views
+- `Applications - UK.md`: UK-specific active/closed/offer views
+- `Applications - China.md`: China-specific active/closed/offer views
 
 ## Why the status is a child row
 
