@@ -8,7 +8,7 @@ module.exports = async (params) => {
   const { app, quickAddApi } = params;
 
   const CONFIG = {
-    logPath: "03 Work/Application Log.md",
+    logPath: "03 Work/Application Database.md",
     detailFolder: "03 Work/Job Search/01 Applications",
     statuses: ["Applied", "Online Test", "Interview 1", "Interview 2", "Interview 3", "Offer", "Rejected", "Withdrawn"],
   };
@@ -29,7 +29,7 @@ module.exports = async (params) => {
     }
   };
 
-  if (!file) { new Notice("Application Log.md not found"); cancel(); }
+  if (!file) { new Notice("Application Database.md not found"); cancel(); }
 
   const content = await app.vault.read(file);
   const lines = content.split("\n");
