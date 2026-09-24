@@ -5,7 +5,7 @@
 
 Last updated: `$=dv.date("today").toFormat("yyyy.MM.dd")`
 
-[[03 Work/Job Search/00 Dashboard/UK 求职看板|UK Dashboard]] · [[03 Work/Job Search/00 Dashboard/CN 求职看板|China Dashboard]] · [[Analytics|Analytics]]
+[[03 Work/Job Search/00 Dashboard/Applications - UK|UK Applications]] · [[03 Work/Job Search/00 Dashboard/Applications - China|China Applications]] · [[Analytics|Analytics]]
 
 ## Overview
 
@@ -186,6 +186,6 @@ SORT S.deadline ASC
 
 ## Quick Access
 
-- [[03 Work/Job Search/00 Dashboard/UK 求职看板|UK Applications]]
-- [[03 Work/Job Search/00 Dashboard/CN 求职看板|China Applications]]
+- [[03 Work/Job Search/00 Dashboard/Applications - UK|UK Applications]]
+- [[03 Work/Job Search/00 Dashboard/Applications - China|China Applications]]
 - [[Analytics|Job Search Analytics]]
