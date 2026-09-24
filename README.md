@@ -1,4 +1,4 @@
-# Obsidian Job Application Management System
+# Job Application Tracker for Obsidian
 
 A metadata-driven job application workflow built with **Obsidian**, **QuickAdd**, **Dataview**, and **JavaScript**.
 
