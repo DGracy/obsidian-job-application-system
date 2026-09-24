@@ -45,7 +45,7 @@ The central log is the single source of truth for status and deadlines. Detail n
 │   └── data-model.md
 └── example-vault/
     └── 03 Work/
-        ├── 找工投递记录.md
+        ├── Application Log.md
         └── Job Search/
             ├── 00 Dashboard/
             │   ├── Overview.md
@@ -54,7 +54,7 @@ The central log is the single source of truth for status and deadlines. Detail n
             ├── 01 Applications/
             │   ├── 2026-09-10 - Northstar Analytics - Graduate Data Analyst.md
             │   └── 2026-09-12 - HarborCart - Product Intern.md
-            └── 03 Scripts/
+            └── 02 Scripts/
                 ├── add-application.js
                 └── update-application.js
 ```
@@ -74,10 +74,10 @@ Dataview JavaScript queries must be enabled for the Overview dashboard.
 
 1. Copy `example-vault/03 Work/` into your Obsidian vault, or reproduce the same folder structure.
 2. In QuickAdd, create a Macro/User Script command for:
-   - `03 Work/Job Search/03 Scripts/add-application.js`
-   - `03 Work/Job Search/03 Scripts/update-application.js`
+   - `03 Work/Job Search/02 Scripts/add-application.js`
+   - `03 Work/Job Search/02 Scripts/update-application.js`
 3. Open `03 Work/Job Search/00 Dashboard/Overview.md`.
-4. Replace the fictional records in `03 Work/找工投递记录.md` with your own data.
+4. Replace the fictional records in `03 Work/Application Log.md` with your own data.
 
 The default script paths are intentionally centralized at the top of each script so they can be changed if your vault uses a different folder structure.
 
