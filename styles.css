@@ -1,0 +1,6 @@
+.jat-dashboard { padding: var(--size-4-4); }
+.jat-table-wrap { overflow-x: auto; }
+.jat-dashboard table { width: 100%; border-collapse: collapse; }
+.jat-dashboard th, .jat-dashboard td { padding: var(--size-4-2); text-align: left; border-bottom: 1px solid var(--background-modifier-border); }
+.jat-dashboard td button { margin: var(--size-2-1); }
+.jat-error { color: var(--text-error); }

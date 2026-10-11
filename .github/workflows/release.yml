@@ -1,0 +1,32 @@
+name: Validate and release plugin
+on:
+  push:
+    branches: [main]
+    paths: ['src/**', 'main.js', 'manifest.json', 'styles.css', 'build.js', 'package.json', 'tests/**', '.github/workflows/release.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: plugin-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run check && npm run build && npm test
+      - run: git diff --exit-code -- main.js
+      - name: Publish versioned assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          version=$(node -p "require('./manifest.json').version")
+          if gh release view "$version" >/dev/null 2>&1; then
+            echo "Release $version already exists; no assets overwritten."
+          else
+            gh release create "$version" main.js manifest.json styles.css --target "$GITHUB_SHA" --title "Job Application Tracker $version" --notes-file RELEASE_NOTES.md
+          fi

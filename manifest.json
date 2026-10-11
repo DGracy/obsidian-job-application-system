@@ -1,0 +1,10 @@
+{
+  "id": "job-application-tracker",
+  "name": "Job Application Tracker",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "Track job applications, recruitment stages, deadlines, and preparation notes in a central Markdown database.",
+  "author": "Zhijie Deng",
+  "authorUrl": "https://github.com/DGracy",
+  "isDesktopOnly": false
+}

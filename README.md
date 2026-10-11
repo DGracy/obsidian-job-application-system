@@ -1,3 +1,41 @@
+# Job Application Tracker
+
+A standalone Obsidian community plugin for tracking applications in a central Markdown database. **QuickAdd and Dataview are not required for the plugin.** The original script/template workflow remains available below.
+
+## Install the plugin
+
+Until accepted into the community directory, install manually:
+
+1. Download `main.js`, `manifest.json`, and `styles.css` from [GitHub Releases](https://github.com/DGracy/obsidian-job-application-system/releases).
+2. Place them in `<vault>/.obsidian/plugins/job-application-tracker/`.
+3. Reload Obsidian and enable **Job Application Tracker** in Settings → Community plugins.
+4. Use the briefcase ribbon icon or the command **Job Application Tracker: Add application**.
+5. Open **Job Application Tracker: Open dashboard / update application** to search, filter, and update applications.
+
+Settings let you choose the Markdown database file and preparation notes folder. Defaults match the original workflow. Existing records are read without importing, copying, or replacing the database. Initialization happens only when saving an application, not when enabling the plugin. Changing settings does not move existing files.
+
+The new form can save a job description and requirements to an optional preparation note. Enable the preparation-note toggle when adding or updating a role. Dates use `YYYY-MM-DD`; clear the deadline field to remove the old deadline. Exact duplicate market/company/role/application-date entries are rejected. Other markets use an `OTHER` ID prefix.
+
+## Development and validation
+
+Node.js 22 or newer; no npm dependencies are required.
+
+```sh
+npm run check
+npm run build
+npm test
+```
+
+`src/plugin.js` uses the Obsidian runtime API. `src/model.js` contains Markdown data operations. `build.js` bundles both into `main.js`; commit the generated file alongside source changes. The release workflow validates the bundle and publishes a GitHub Release only when the manifest version has no existing release. Increment `manifest.json`, `package.json`, and `versions.json` for subsequent releases.
+
+Automated checks cover the data model and mocked plugin loading. Real Obsidian desktop/mobile interface testing is still required. `isDesktopOnly: false` indicates that the implementation avoids desktop-only APIs; it does not claim completed mobile testing. Back up your database before first use.
+
+No telemetry, network requests, or external services are used by the plugin. Application data stays in your vault. Original fictional examples remain unchanged.
+
+---
+
+## Original QuickAdd / Dataview workflow
+
 # Job Application Tracker for Obsidian
 
 A metadata-driven job application workflow built with **Obsidian**, **QuickAdd**, **Dataview**, and **JavaScript**.
