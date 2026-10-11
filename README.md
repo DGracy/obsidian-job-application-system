@@ -29,6 +29,14 @@ The old ID `job-application-tracker` conflicts with another community plugin. Ve
 
 Application records and preparation notes do not need migration. If you intentionally installed the other author's plugin too, keep it in its own folder and install Application Flow separately.
 
+## Language / 语言
+
+In Settings → Application Flow → Interface language, choose **English** or **中文**. The selection is saved for this vault. Settings and dashboards update immediately; reopen an already-open application form to see the chosen language.
+
+在「设置 → Application Flow → 界面语言」选择中文或 English。语言选择会保存在当前仓库中。表单、按钮、招聘阶段、总览和提示支持双语；新建准备笔记的标题使用当前语言。
+
+Language changes translate the interface, not user-entered text or existing notes. Stored market/status/priority values and metadata keys remain stable for compatibility with existing dashboards and scripts. Free-text role/source suggestions retain their original wording.
+
 ## Development and validation
 
 Node.js 22 or newer; no npm dependencies are required.

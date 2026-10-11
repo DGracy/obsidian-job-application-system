@@ -1,9 +1,12 @@
-Rename to Application Flow and fix the community plugin ID collision.
+Chinese and English interface support.
 
-- Name: Application Flow; ID: dgracy-application-flow.
-- Includes all 1.1.0 market tabs, custom suggestions, independent drafts and collapsed optional fields.
-- Application database and preparation notes remain compatible.
+- Choose English or 中文 under Settings → Application Flow → Interface language.
+- Language preference is saved per vault; settings/dashboard update immediately.
+- Forms, buttons, command names, recruitment-stage labels, validation messages and summary counts are translated.
+- New preparation note headings follow the selected language; existing notes and user text are untouched.
+- Metadata keys and stored market/status/priority values remain stable for compatibility.
+- Free-text suggestions preserve their original wording.
 
-Upgrade: disable the old Zhijie Deng plugin entry, quit Obsidian, rename its manually installed folder from job-application-tracker to dgracy-application-flow, and replace main.js, manifest.json and styles.css. Keep data.json if present to preserve path settings. Reopen Obsidian and enable Application Flow.
+Replace main.js, manifest.json and styles.css in .obsidian/plugins/dgracy-application-flow/, preserve data.json, and reload the plugin. Reopen an existing form after changing language.
 
-Do not use the unrelated community entry with the old ID to update this plugin. Real native desktop/mobile UI testing remains pending.
+Automated data, plugin loading, language persistence and mocked form tests pass. Native Obsidian desktop/mobile UI verification remains pending.
