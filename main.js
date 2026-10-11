@@ -50,7 +50,7 @@ module.exports={clean,today,validDate,records,duplicate,add,update,createDraft,m
 return module.exports; })();
 const {Plugin, Modal, Setting, Notice, TFile, TFolder, ItemView, PluginSettingTab, normalizePath}=require('obsidian');
 
-const VIEW='job-application-tracker-dashboard';
+const VIEW='dgracy-application-flow-dashboard';
 const STATUSES=['Applied','Online Test','Interview 1','Interview 2','Interview 3','Offer','Rejected','Withdrawn'];
 const DEFAULTS={database:'03 Work/Application Database.md',details:'03 Work/Job Search/01 Applications'};
 class Form extends Modal {
@@ -140,7 +140,7 @@ class Dashboard extends ItemView {
 function vaultPath(value,markdown=false){const raw=String(value||'').trim();if(!raw||raw.startsWith('/')||raw.includes('\\')||raw.split('/').some(p=>p==='..'||p==='.')||/[\[\]|#^:*?"<>]/.test(raw))throw Error('Use a relative vault path without special characters.');const p=normalizePath(raw);if(markdown&&!p.endsWith('.md'))throw Error('Database path must end in .md.');return p;}
 class TrackerSettings extends PluginSettingTab {
  constructor(app,plugin){super(app,plugin);this.plugin=plugin;}
- display(){const c=this.containerEl;c.empty();c.createEl('h2',{text:'Job Application Tracker'});c.createEl('p',{text:'Existing Markdown records are retained. Changing paths does not move files.'});
+ display(){const c=this.containerEl;c.empty();c.createEl('h2',{text:'Application Flow'});c.createEl('p',{text:'Existing Markdown records are retained. Changing paths does not move files.'});
   for(const [key,label] of [['database','Database file'],['details','Preparation notes folder']]){let value=this.plugin.settings[key];new Setting(c).setName(label).addText(t=>t.setValue(value).onChange(v=>value=v)).addButton(b=>b.setButtonText('Apply').onClick(async()=>{try{this.plugin.settings[key]=vaultPath(value,key==='database');await this.plugin.saveData(this.plugin.settings);this.plugin.refresh();new Notice('Path saved.');}catch(e){new Notice(e.message);}}));}
  }
 }

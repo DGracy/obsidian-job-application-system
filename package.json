@@ -1,1 +1,10 @@
-{"name":"job-application-tracker","version":"1.1.0","private":true,"scripts":{"build":"node build.js","test":"node --test tests/*.test.js","check":"node --check src/plugin.js && node --check src/model.js"}}
+{
+  "name": "dgracy-application-flow",
+  "version": "1.1.1",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "test": "node --test tests/*.test.js",
+    "check": "node --check src/plugin.js && node --check src/model.js"
+  }
+}

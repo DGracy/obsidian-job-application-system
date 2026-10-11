@@ -1,13 +1,9 @@
-Market-aware application forms.
+Rename to Application Flow and fix the community plugin ID collision.
 
-- UK / China / Other tabs, with separate drafts retained while switching tabs.
-- UK sponsorship is hidden and omitted from saved China and other-market records.
-- Other accepts an actual country or region; these records remain accessible under Other in the dashboard.
-- Free-text role types and sources with market-specific and historical suggestions.
-- Optional fields are collapsed under More information.
-- Job description and requirements appear only when preparation notes are enabled.
-- Existing Markdown data and the original workflow remain compatible.
+- Name: Application Flow; ID: dgracy-application-flow.
+- Includes all 1.1.0 market tabs, custom suggestions, independent drafts and collapsed optional fields.
+- Application database and preparation notes remain compatible.
 
-Update manually by replacing main.js, manifest.json and styles.css in your plugin folder, then reload the plugin. No database migration is needed.
+Upgrade: disable the old Zhijie Deng plugin entry, quit Obsidian, rename its manually installed folder from job-application-tracker to dgracy-application-flow, and replace main.js, manifest.json and styles.css. Keep data.json if present to preserve path settings. Reopen Obsidian and enable Application Flow.
 
-Validation: syntax checks, eight tests covering data, plugin loading, and mocked form interactions. Native desktop/mobile Obsidian UI testing remains to be completed.
+Do not use the unrelated community entry with the old ID to update this plugin. Real native desktop/mobile UI testing remains pending.

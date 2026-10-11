@@ -28,5 +28,5 @@ jobs:
           if gh release view "$version" >/dev/null 2>&1; then
             echo "Release $version already exists; no assets overwritten."
           else
-            gh release create "$version" main.js manifest.json styles.css --target "$GITHUB_SHA" --title "Job Application Tracker $version" --notes-file RELEASE_NOTES.md
+            gh release create "$version" main.js manifest.json styles.css --target "$GITHUB_SHA" --title "Application Flow $version" --notes-file RELEASE_NOTES.md
           fi
