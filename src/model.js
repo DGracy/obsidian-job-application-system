@@ -36,4 +36,11 @@ function update(text,id,status,deadline,note,detail) {
  if(detail) block[0]=block[0].replace(/\s*\[detail::\s*\[\[[^\]]+\]\]\]/,'')+` [detail:: [[${detail}]]]`;
  lines.splice(r.start,r.end-r.start,...block); return lines.join('\n');
 }
-module.exports={clean,today,validDate,records,duplicate,add,update};
+function createDraft(market) {return {country:market,region:'',company:'',role:'',type:'',sponsor:market==='UK'?'Unknown':'',source:'',applied:today(),status:'Applied',deadline:'',website:'',track:'',priority:'Medium',cv_version:'',detail:false,summary:'',requirements:''};}
+function marketSubmission(market,draft) {
+ const result={...draft,country:market};
+ if(market==='Other'){result.country=clean(draft.region);if(!result.country)throw Error('Enter a country or region for Other.');if(['uk','china'].includes(result.country.toLowerCase()))throw Error('Use the UK or China tab for this market.');}
+ if(market!=='UK')delete result.sponsor;
+ delete result.region;return result;
+}
+module.exports={clean,today,validDate,records,duplicate,add,update,createDraft,marketSubmission};

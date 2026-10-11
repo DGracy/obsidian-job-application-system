@@ -38,7 +38,14 @@ function update(text,id,status,deadline,note,detail) {
  if(detail) block[0]=block[0].replace(/\s*\[detail::\s*\[\[[^\]]+\]\]\]/,'')+` [detail:: [[${detail}]]]`;
  lines.splice(r.start,r.end-r.start,...block); return lines.join('\n');
 }
-module.exports={clean,today,validDate,records,duplicate,add,update};
+function createDraft(market) {return {country:market,region:'',company:'',role:'',type:'',sponsor:market==='UK'?'Unknown':'',source:'',applied:today(),status:'Applied',deadline:'',website:'',track:'',priority:'Medium',cv_version:'',detail:false,summary:'',requirements:''};}
+function marketSubmission(market,draft) {
+ const result={...draft,country:market};
+ if(market==='Other'){result.country=clean(draft.region);if(!result.country)throw Error('Enter a country or region for Other.');if(['uk','china'].includes(result.country.toLowerCase()))throw Error('Use the UK or China tab for this market.');}
+ if(market!=='UK')delete result.sponsor;
+ delete result.region;return result;
+}
+module.exports={clean,today,validDate,records,duplicate,add,update,createDraft,marketSubmission};
 
 return module.exports; })();
 const {Plugin, Modal, Setting, Notice, TFile, TFolder, ItemView, PluginSettingTab, normalizePath}=require('obsidian');
@@ -47,26 +54,68 @@ const VIEW='job-application-tracker-dashboard';
 const STATUSES=['Applied','Online Test','Interview 1','Interview 2','Interview 3','Offer','Rejected','Withdrawn'];
 const DEFAULTS={database:'03 Work/Application Database.md',details:'03 Work/Job Search/01 Applications'};
 class Form extends Modal {
- constructor(plugin,record=null) {super(plugin.app);this.plugin=plugin;this.record=record;}
+ constructor(plugin,record=null) {
+  super(plugin.app);this.plugin=plugin;this.record=record;this.market='UK';this.expanded={UK:false,China:false,Other:false};
+  this.drafts=Object.fromEntries(['UK','China','Other'].map(m=>[m,model.createDraft(m)]));
+  this.updateDraft=record?{status:record.status,deadline:record.deadline,note:'',detail:false}:null;
+  this.previous=[];this.closed=false;
+ }
  onOpen() {
-  const c=this.contentEl;c.empty();c.createEl('h2',{text:this.record?'Update application':'Add application'});
-  const r=this.record; const data=r?{status:r.status,deadline:r.deadline,note:'',detail:false}:{country:'UK',company:'',role:'',type:'Graduate Scheme',sponsor:'Unknown',source:'',applied:model.today(),status:'Applied',deadline:'',website:'',track:'',priority:'Medium',cv_version:'',detail:false};
-  const text=(key,label,area=false)=>{const s=new Setting(c).setName(label); const configure=t=>t.setValue(data[key]||'').onChange(v=>data[key]=v);if(area)s.addTextArea(configure);else s.addText(configure);};
-  const pick=(key,label,options)=>new Setting(c).setName(label).addDropdown(d=>{options.forEach(o=>d.addOption(o,o));d.setValue(data[key]).onChange(v=>data[key]=v);});
-  if(!r) {pick('country','Market',['UK','China','Other']);text('company','Company *');text('role','Role *');pick('type','Role type',['Graduate Scheme','Full-time','Internship','Part-time','Unknown']);pick('sponsor','Sponsorship (UK)',['Unknown','Yes','No']);text('source','Source');text('applied','Applied date (YYYY-MM-DD) *');text('website','Job URL');text('track','Career track');pick('priority','Priority',['High','Medium','Low']);text('cv_version','CV version');}
-  pick('status','Recruitment stage',STATUSES);text('deadline','Deadline (YYYY-MM-DD, optional)');if(r)text('note','History note');
-  new Setting(c).setName(r?'Create preparation note if no valid note exists':'Create preparation note').setDesc('Useful for assessments, interviews, or high-priority roles.').addToggle(t=>t.setValue(false).onChange(v=>data.detail=v));
-  if(!r) {text('summary','Job description / summary',true);text('requirements','Requirements',true);}
+  this.render();
+  void this.plugin.readDatabase().then(text=>{this.previous=model.records(text);this.populateSuggestions();}).catch(()=>{});
+ }
+ populateSuggestions(){
+  if(this.closed)return;
+  for(const {list,key,defaults} of this.suggestions||[]){
+   list.empty();const values=[...new Set([...defaults,...this.previous.filter(r=>r.country===this.market || (this.market==='Other'&&!['UK','China'].includes(r.country))).map(r=>r[key]).filter(Boolean)])];
+   for(const value of values)list.createEl('option',{value});
+  }
+ }
+ render() {
+  const c=this.contentEl;c.empty();c.addClass('jat-form');this.suggestions=[];
+  c.createEl('h2',{text:this.record?'Update application':'Add application'});
+  const r=this.record;const data=r?this.updateDraft:this.drafts[this.market];
+  if(!r){
+   const tabs=c.createDiv({cls:'jat-market-tabs'});tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Application market');
+   for(const market of ['UK','China','Other']){const button=tabs.createEl('button',{text:market,cls:market===this.market?'jat-market-active':''});button.setAttribute('role','tab');button.setAttribute('aria-selected',String(market===this.market));button.addEventListener('click',()=>{this.market=market;this.render();});}
+   c.createEl('p',{text:'Each market keeps its own draft while this form is open.',cls:'jat-hint'});
+  }
+  const text=(parent,key,label,area=false)=>{const setting=new Setting(parent).setName(label);const configure=t=>t.setValue(data[key]||'').onChange(v=>data[key]=v);if(area)setting.addTextArea(configure);else setting.addText(configure);};
+  const pick=(parent,key,label,options)=>new Setting(parent).setName(label).addDropdown(d=>{options.forEach(o=>d.addOption(o,o));d.setValue(data[key]).onChange(v=>data[key]=v);});
+  const suggest=(parent,key,label,defaults)=>{
+   const listId='jat-'+key+'-'+Math.random().toString(36).slice(2);
+   new Setting(parent).setName(label).setDesc('Type any value, or choose a suggestion.').addText(t=>{t.setValue(data[key]||'').onChange(v=>data[key]=v);t.inputEl.setAttribute('list',listId);});
+   const list=parent.createEl('datalist');list.id=listId;this.suggestions.push({list,key,defaults});
+  };
+  if(!r){
+   if(this.market==='Other')text(c,'region','Country / region *');
+   text(c,'company','Company *');text(c,'role','Role *');text(c,'applied','Applied date (YYYY-MM-DD) *');
+  }
+  pick(c,'status','Recruitment stage',STATUSES);text(c,'deadline','Deadline (YYYY-MM-DD, optional)');if(r)text(c,'note','History note');
+  if(!r){
+   const more=c.createEl('details',{cls:'jat-more'});more.open=this.expanded[this.market];more.createEl('summary',{text:'More information (optional)'});more.addEventListener('toggle',()=>{this.expanded[this.market]=more.open;});
+   const types=this.market==='UK'?['Graduate Scheme','Full-time','Internship','Part-time']:this.market==='China'?['秋招','春招','日常实习','暑期实习','全职','兼职']:[];
+   const sources=this.market==='UK'?['LinkedIn','Company Website','targetjobs','UCL Careers','Indeed','Referral']:this.market==='China'?['公司官网','Boss直聘','牛客','智联招聘','内推','LinkedIn']:[];
+   suggest(more,'type','Role type',types);
+   if(this.market==='UK')pick(more,'sponsor','Visa sponsorship',['Unknown','Yes','No']);
+   suggest(more,'source','Application source',sources);text(more,'website','Job URL');suggest(more,'track','Career track',['Data / Analytics','Product','Technology','Finance / M&A','Strategy','Operations']);pick(more,'priority','Priority',['High','Medium','Low']);suggest(more,'cv_version','CV version',[]);
+  }
+  const preparation=c.createDiv();
+  new Setting(preparation).setName(r?'Create preparation note if no valid note exists':'Create preparation note').setDesc('Enable to save a job description and requirements with your preparation notes.').addToggle(t=>t.setValue(data.detail).onChange(v=>{data.detail=v;fields.hidden=!v;}));
+  const fields=preparation.createDiv({cls:'jat-preparation'});fields.hidden=!data.detail;
+  if(!r){text(fields,'summary','Job description / summary',true);text(fields,'requirements','Requirements',true);}
   const error=c.createEl('p',{cls:'jat-error'});
   new Setting(c).addButton(b=>b.setButtonText('Cancel').onClick(()=>this.close())).addButton(b=>b.setButtonText('Save').setCta().onClick(async()=>{
    b.setDisabled(true);try {
-    if(!r && (!model.clean(data.company)||!model.clean(data.role)||!model.validDate(data.applied)))throw Error('Enter a company, role, and valid applied date.');
-    if(data.deadline && !model.validDate(data.deadline))throw Error('Enter a valid deadline or leave it blank.');
-    await this.plugin.saveApplication(r,data);this.close();new Notice('Application saved.');
+    const submission=r?{...data}:model.marketSubmission(this.market,data);
+    if(!r && (!model.clean(submission.company)||!model.clean(submission.role)||!model.validDate(submission.applied)))throw Error('Enter a company, role, and valid applied date.');
+    if(submission.deadline && !model.validDate(submission.deadline))throw Error('Enter a valid deadline or leave it blank.');
+    await this.plugin.saveApplication(r,submission);this.close();new Notice('Application saved.');
    }catch(e){error.setText(e.message);b.setDisabled(false);}
   }));
+  this.populateSuggestions();
  }
- onClose(){this.contentEl.empty();}
+ onClose(){this.closed=true;this.contentEl.empty();}
 }
 class Dashboard extends ItemView {
  constructor(leaf,plugin){super(leaf);this.plugin=plugin;this.market='All';this.query='';}
@@ -80,7 +129,7 @@ class Dashboard extends ItemView {
  async renderRows(){
   const target=this.rowsEl;try{
    const all=model.records(await this.plugin.readDatabase());if(this.rowsEl!==target)return;
-   target.empty();const rows=all.filter(r=>(this.market==='All'||r.country===this.market)&&`${r.company} ${r.role}`.toLowerCase().includes(this.query.toLowerCase()));
+   target.empty();const rows=all.filter(r=>(this.market==='All'||r.country===this.market||(this.market==='Other'&&!['UK','China'].includes(r.country)))&&`${r.company} ${r.role}`.toLowerCase().includes(this.query.toLowerCase()));
    target.createEl('p',{text:`${rows.length} applications · ${all.filter(r=>r.status==='Offer').length} offers`});
    if(!rows.length){target.createEl('p',{text:'No matching applications. Add your first application or select an existing database in settings.'});return;}
    const wrap=target.createDiv({cls:'jat-table-wrap'}),table=wrap.createEl('table');const head=table.createEl('thead').createEl('tr');['Company / role','Market','Stage','Deadline','Actions'].forEach(t=>head.createEl('th',{text:t}));const body=table.createEl('tbody');
@@ -103,7 +152,7 @@ module.exports=class JobTracker extends Plugin {
  async ensureFolder(path){if(!path)return;let current='';for(const part of path.split('/')){current=current?current+'/'+part:part;const existing=this.app.vault.getAbstractFileByPath(current);if(existing && !(existing instanceof TFolder))throw Error('A file blocks the notes folder.');if(!existing)await this.app.vault.createFolder(current);}}
  async saveApplication(record,input){const task=this.queue.then(()=>this.writeApplication(record,input));this.queue=task.catch(()=>{});return task;}
  async writeApplication(record,input){
-  const path=vaultPath(this.settings.database,true);const data={...input};for(const key of Object.keys(data))if(typeof data[key]==='string' && !['summary','requirements'].includes(key))data[key]=model.clean(data[key]);
+  const path=vaultPath(this.settings.database,true);const data={...input};if(data.country!=='UK')delete data.sponsor;for(const key of Object.keys(data))if(typeof data[key]==='string' && !['summary','requirements'].includes(key))data[key]=model.clean(data[key]);
   let content=await this.readDatabase(),r=record?model.records(content).find(x=>x.id===record.id):null;
   if(record&&!r)throw Error('Application no longer exists. Refresh the dashboard.');
   if(!record&&model.duplicate(content,data))throw Error('This market, company, role, and applied date already exist. Update the existing application.');

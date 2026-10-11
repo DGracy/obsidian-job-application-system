@@ -16,6 +16,8 @@ Settings let you choose the Markdown database file and preparation notes folder.
 
 The new form can save a job description and requirements to an optional preparation note. Enable the preparation-note toggle when adding or updating a role. Dates use `YYYY-MM-DD`; clear the deadline field to remove the old deadline. Exact duplicate market/company/role/application-date entries are rejected. Other markets use an `OTHER` ID prefix.
 
+The Add application form has UK, China, and Other tabs with independent drafts. Sponsorship is shown and saved only for UK. Other requires a country/region name, stored as the actual market. Role type and source accept custom text and offer market-specific suggestions plus values from your existing records. More information is collapsed initially; JD and requirements are shown only when preparation notes are enabled. Closing the form discards unsaved drafts.
+
 ## Development and validation
 
 Node.js 22 or newer; no npm dependencies are required.

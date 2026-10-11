@@ -1,12 +1,13 @@
-Initial standalone Obsidian plugin release.
+Market-aware application forms.
 
-- Native application entry and update forms; no QuickAdd or Dataview dependency.
-- Central Markdown database compatible with the original example workflow.
-- Stable application IDs, duplicate checks, stage/deadline updates and history.
-- Optional Markdown preparation notes with job description and requirements.
-- Searchable dashboard with UK, China and other-market filtering.
-- Configurable database and preparation-note paths.
+- UK / China / Other tabs, with separate drafts retained while switching tabs.
+- UK sponsorship is hidden and omitted from saved China and other-market records.
+- Other accepts an actual country or region; these records remain accessible under Other in the dashboard.
+- Free-text role types and sources with market-specific and historical suggestions.
+- Optional fields are collapsed under More information.
+- Job description and requirements appear only when preparation notes are enabled.
+- Existing Markdown data and the original workflow remain compatible.
 
-Manual installation: download main.js, manifest.json and styles.css into <vault>/.obsidian/plugins/job-application-tracker/, reload Obsidian, and enable Job Application Tracker under Community plugins. The plugin has not yet been listed in the community directory.
+Update manually by replacing main.js, manifest.json and styles.css in your plugin folder, then reload the plugin. No database migration is needed.
 
-Validation: JavaScript syntax checks, data-model regression tests against the original demo, and mocked Obsidian plugin loading. Real desktop/mobile UI testing remains to be completed. Back up your database before using a first release with live applications.
+Validation: syntax checks, eight tests covering data, plugin loading, and mocked form interactions. Native desktop/mobile Obsidian UI testing remains to be completed.
