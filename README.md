@@ -57,9 +57,25 @@ The plugin does not assign a default direct shortcut for adding an application. 
 
 ### Open the dashboard / 查看和更新申请
 
-Click the **briefcase icon in the left ribbon / 左侧工具栏的公文包图标**, or open the command palette and search for **Application Flow: Open dashboard / update application** or **Application Flow: 打开总览／更新申请**.
+The dashboard is a plugin view, not a Markdown note. It does not create a file called “Dashboard” or “求职面板” in the file list. Even one or two saved applications can be displayed.
 
-The dashboard shows your application records. Search for a company or role, filter by market, and click **Update / 更新** to change the recruitment stage, deadline, and history note.
+1. If the **Add application** form is open, press **Esc** or click its close button.
+2. Click the **briefcase icon in the left ribbon**.
+3. The **Job applications** view opens, with Add application, Refresh, market filters, a search box, and the application table.
+4. To open it from the command palette instead, press **⌘ P** on Mac or **Ctrl P** on Windows/Linux, search for **Application Flow: Open dashboard / update application**, then press **Enter**.
+5. Click **Update** beside an application to change its recruitment stage, deadline, and history note.
+
+中文操作：
+
+1. 如果「新增申请」窗口还开着，按 **Esc** 或点击关闭按钮。
+2. 点击 **最左侧工具栏的公文包图标**。
+3. 打开标题为 **「求职申请」** 的总览，里面有 **新增申请、刷新、市场筛选、搜索框和申请表格**。
+4. 也可以按 **⌘ P（Mac）／Ctrl P（Windows、Linux）**，搜索 **「打开总览／更新申请」**，按回车打开。
+5. 点击某条申请旁的 **「更新」**，修改招聘阶段、截止日期和流程备注。
+
+**总览是插件视图，不会在文件列表里生成一篇「求职面板」笔记；只有一两条申请也能展示。**
+
+If saved records are not visible, select **All / 全部**, clear the search box, and click **Refresh / 刷新**. Also check **Settings → Application Flow → Database file / 数据库文件** points to the file where your applications were saved.
 
 ### Try the dashboard with fictional data / 使用虚构数据体验总览
 
