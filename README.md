@@ -32,6 +32,45 @@ Application Flow is available in the [Obsidian Community directory](https://comm
 
 </details>
 
+## Quick start / 快速开始
+
+### Add a new application / 新增投递记录
+
+The plugin does not assign a default direct shortcut for adding an application. Use Obsidian's command palette:
+
+| Computer / 电脑 | Open command palette / 打开命令面板 |
+| --- | --- |
+| Mac | `⌘ Command + P` |
+| Windows / Linux | `Ctrl + P` |
+
+1. Press the keys above.
+2. Search for **Application Flow: Add application** (English interface) or **Application Flow: 新增申请** (中文界面).
+3. Press **Enter / 回车** to open the application form.
+4. Choose **UK / China / Other**; enter the company, role, and application date, then select the recruitment stage.
+5. Expand **More information / 更多信息** for role type, source, job URL, CV version, and other optional fields.
+6. Enable **Create preparation note / 创建准备笔记** if you want to save the JD and requirements.
+7. Click **Save / 保存**. The record is saved to the configured Markdown database.
+
+中文：Mac 按 **⌘ P**，Windows／Linux 按 **Ctrl P**，搜索 **新增申请**，按回车即可打开投递表单。填写后点击 **保存**。
+
+### Open the dashboard / 查看和更新申请
+
+Click the **briefcase icon in the left ribbon / 左侧工具栏的公文包图标**, or open the command palette and search for **Application Flow: Open dashboard / update application** or **Application Flow: 打开总览／更新申请**.
+
+The dashboard shows your application records. Search for a company or role, filter by market, and click **Update / 更新** to change the recruitment stage, deadline, and history note.
+
+### Set your own direct shortcuts / 自定义一键快捷键
+
+Open **Settings → Hotkeys / 设置 → 快捷键**, search for **Application Flow**, and assign a shortcut to **Add application / 新增申请** or **Open dashboard / update application / 打开总览／更新申请**.
+
+Choose a combination that Obsidian does not mark as conflicting. These direct shortcuts are user-configured; `⌘ P` / `Ctrl P` opens the command palette rather than the form itself.
+
+### Community plugin page / 社区插件页面
+
+The actual Obsidian listing below shows the installed plugin and its author. For a new installation, use **Install / 安装** and then **Enable / 启用**. Once installed, **Options / 选项** opens the plugin settings and **Hotkeys / 快捷键** opens shortcut configuration.
+
+![Application Flow installed in Obsidian, showing Options and Hotkeys buttons](docs/images/community-plugin-page.png)
+
 Settings let you choose the Markdown database file and preparation notes folder. Defaults match the original workflow. Existing records are read without importing, copying, or replacing the database. Initialization happens only when saving an application, not when enabling the plugin. Changing settings does not move existing files.
 
 The new form can save a job description and requirements to an optional preparation note. Enable the preparation-note toggle when adding or updating a role. Dates use `YYYY-MM-DD`; clear the deadline field to remove the old deadline. Exact duplicate market/company/role/application-date entries are rejected. Other markets use an `OTHER` ID prefix.
