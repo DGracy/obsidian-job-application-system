@@ -2,15 +2,35 @@
 
 A standalone Obsidian community plugin for tracking applications in a central Markdown database. **QuickAdd and Dataview are not required for the plugin.** The original script/template workflow remains available below.
 
-## Install the plugin
+## Install the plugin / 安装插件
 
-Until accepted into the community directory, install manually:
+Application Flow is available in the [Obsidian Community directory](https://community.obsidian.md/plugins/dgracy-application-flow). You can install it directly inside Obsidian; no manual GitHub download is needed.
+
+1. Open **Settings → Community plugins → Browse** (turn off Restricted mode if prompted).
+2. Search for **Application Flow** and confirm the author is **Zhijie Deng**.
+3. Click **Install**, then **Enable**.
+4. Open **Settings → Application Flow → Interface language** to choose **English** or **中文**.
+5. Click the briefcase ribbon icon, or use the command **Application Flow: Add application**. Open **Application Flow: Open dashboard / update application** to search, filter, and update applications.
+
+中文安装步骤：
+
+1. 打开 **设置 → 社区插件 → 浏览**；如有提示，先关闭受限模式。
+2. 搜索 **Application Flow**，确认作者为 **Zhijie Deng**。
+3. 点击 **安装**，然后点击 **启用**。
+4. 在 **设置 → Application Flow → 界面语言** 中选择中文或 English。
+5. 点击侧栏公文包图标，或在命令面板中使用「新增申请」「打开总览／更新申请」。
+
+**QuickAdd and Dataview are not required. 无需额外安装 QuickAdd 或 Dataview。**
+
+<details>
+<summary>Manual installation (alternative) / 手动安装（备用方式）</summary>
 
 1. Download `main.js`, `manifest.json`, and `styles.css` from [GitHub Releases](https://github.com/DGracy/obsidian-job-application-system/releases).
 2. Place them in `<vault>/.obsidian/plugins/dgracy-application-flow/`.
 3. Reload Obsidian and enable **Application Flow** in Settings → Community plugins.
-4. Use the briefcase ribbon icon or the command **Application Flow: Add application**.
-5. Open **Application Flow: Open dashboard / update application** to search, filter, and update applications.
+4. When replacing an existing manual installation, preserve `data.json` if present to retain your settings.
+
+</details>
 
 Settings let you choose the Markdown database file and preparation notes folder. Defaults match the original workflow. Existing records are read without importing, copying, or replacing the database. Initialization happens only when saving an application, not when enabling the plugin. Changing settings does not move existing files.
 
@@ -24,7 +44,7 @@ The old ID `job-application-tracker` conflicts with another community plugin. Ve
 
 1. Disable the old **Job Application Tracker** entry whose author is **Zhijie Deng**. Do not install or update the unrelated community entry.
 2. Quit Obsidian. Rename your manually installed `.obsidian/plugins/job-application-tracker/` folder to `.obsidian/plugins/dgracy-application-flow/`.
-3. Replace `main.js`, `manifest.json`, and `styles.css` with the 1.1.1 release assets. Preserve `data.json` if present; it contains your configured paths.
+3. Replace `main.js`, `manifest.json`, and `styles.css` with the latest release assets. Preserve `data.json` if present; it contains your configured paths.
 4. Reopen Obsidian and enable **Application Flow**. Check your database path in settings.
 
 Application records and preparation notes do not need migration. If you intentionally installed the other author's plugin too, keep it in its own folder and install Application Flow separately.
