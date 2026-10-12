@@ -77,6 +77,10 @@ The dashboard is a plugin view, not a Markdown note. It does not create a file c
 
 If saved records are not visible, select **All / 全部**, clear the search box, and click **Refresh / 刷新**. Also check **Settings → Application Flow → Database file / 数据库文件** points to the file where your applications were saved.
 
+![Application Flow dashboard showing fictional UK applications, stages, deadlines and update buttons](docs/images/dashboard-demo-en.png)
+
+*Actual Obsidian screenshot with fictional demo records. In version 1.2.0, the application count follows the current filter, while the offer count refers to the whole database. / 真实 Obsidian 截图，使用虚构演示记录。1.2.0 中，申请数量跟随筛选条件，录用数量统计整个数据库。*
+
 ### Try the dashboard with fictional data / 使用虚构数据体验总览
 
 Download [Application-Database-Demo.md](docs/demo/Application-Database-Demo.md), put it anywhere in your **test vault**, then set **Settings → Application Flow → Database file** to its vault-relative path (for example `Application-Database-Demo.md` if saved at the vault root). Apply the setting and open or refresh the dashboard.
