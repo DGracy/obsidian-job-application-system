@@ -51,6 +51,8 @@ The plugin does not assign a default direct shortcut for adding an application. 
 6. Enable **Create preparation note / 创建准备笔记** if you want to save the JD and requirements.
 7. Click **Save / 保存**. The record is saved to the configured Markdown database.
 
+![Chinese Add application form with market tabs and optional fields](docs/images/add-application-zh.png)
+
 中文：Mac 按 **⌘ P**，Windows／Linux 按 **Ctrl P**，搜索 **新增申请**，按回车即可打开投递表单。填写后点击 **保存**。
 
 ### Open the dashboard / 查看和更新申请
@@ -58,6 +60,14 @@ The plugin does not assign a default direct shortcut for adding an application. 
 Click the **briefcase icon in the left ribbon / 左侧工具栏的公文包图标**, or open the command palette and search for **Application Flow: Open dashboard / update application** or **Application Flow: 打开总览／更新申请**.
 
 The dashboard shows your application records. Search for a company or role, filter by market, and click **Update / 更新** to change the recruitment stage, deadline, and history note.
+
+### Try the dashboard with fictional data / 使用虚构数据体验总览
+
+Download [Application-Database-Demo.md](docs/demo/Application-Database-Demo.md), put it anywhere in your **test vault**, then set **Settings → Application Flow → Database file** to its vault-relative path (for example `Application-Database-Demo.md` if saved at the vault root). Apply the setting and open or refresh the dashboard.
+
+The file contains 12 fictional applications across UK, China, Germany and Singapore, covering all eight recruitment stages. The dashboard shows 12 applications and 1 offer. It does not contain real applications. Keep your original database separate; changing the setting does not overwrite it.
+
+中文：把示例文件放在测试 vault 的根目录，在「设置 → Application Flow → 数据库文件」填写 `Application-Database-Demo.md`，点击「应用」，然后打开或刷新总览，即可显示 12 条演示申请。切回原来的数据库路径即可恢复真实记录视图。
 
 ### Set your own direct shortcuts / 自定义一键快捷键
 
