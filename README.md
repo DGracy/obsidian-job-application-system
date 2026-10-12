@@ -97,9 +97,7 @@ Choose a combination that Obsidian does not mark as conflicting. These direct sh
 
 ### Community plugin page / 社区插件页面
 
-The actual Obsidian listing below shows the installed plugin and its author. For a new installation, use **Install / 安装** and then **Enable / 启用**. Once installed, **Options / 选项** opens the plugin settings and **Hotkeys / 快捷键** opens shortcut configuration.
-
-![Application Flow installed in Obsidian, showing Options and Hotkeys buttons](docs/images/community-plugin-page.png)
+For a new installation, use **Install / 安装** and then **Enable / 启用**. Once installed, **Options / 选项** opens the plugin settings and **Hotkeys / 快捷键** opens shortcut configuration.
 
 Settings let you choose the Markdown database file and preparation notes folder. Defaults match the original workflow. Existing records are read without importing, copying, or replacing the database. Initialization happens only when saving an application, not when enabling the plugin. Changing settings does not move existing files.
 
