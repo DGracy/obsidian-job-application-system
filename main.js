@@ -45,7 +45,10 @@ function marketSubmission(market,draft) {
  if(market!=='UK')delete result.sponsor;
  delete result.region;return result;
 }
-module.exports={clean,today,validDate,records,duplicate,add,update,createDraft,marketSubmission};
+const TRACK_LABELS={'Data / Analytics':'数据分析','Product':'产品','Technology':'技术','Finance / M&A':'金融与并购','Strategy':'战略','Operations':'运营'};
+function trackSuggestion(value,market,language){const chinese=market==='China'||language==='zh';if(chinese)return TRACK_LABELS[value]||value;return Object.entries(TRACK_LABELS).find(([,label])=>label===value)?.[0]||value;}
+function trackSuggestions(market,language){return Object.keys(TRACK_LABELS).map(v=>trackSuggestion(v,market,language));}
+module.exports={trackSuggestion,trackSuggestions,clean,today,validDate,records,duplicate,add,update,createDraft,marketSubmission};
 
 return module.exports; })();
 const i18n = (() => { const module = { exports: {} };
@@ -161,7 +164,7 @@ class Form extends Modal {
  populateSuggestions(){
   if(this.closed)return;
   for(const {list,key,defaults} of this.suggestions||[]){
-   list.empty();const values=[...new Set([...defaults,...this.previous.filter(r=>r.country===this.market || (this.market==='Other'&&!['UK','China'].includes(r.country))).map(r=>r[key]).filter(Boolean)])];
+   list.empty();const values=[...new Set([...defaults,...this.previous.filter(r=>r.country===this.market || (this.market==='Other'&&!['UK','China'].includes(r.country))).map(r=>key==='track'?model.trackSuggestion(r[key],this.market,this.plugin.settings.language):r[key]).filter(Boolean)])];
    for(const value of values)list.createEl('option',{value});
   }
  }
@@ -192,7 +195,7 @@ class Form extends Modal {
    const sources=this.market==='UK'?['LinkedIn','Company Website','targetjobs','UCL Careers','Indeed','Referral']:this.market==='China'?['公司官网','Boss直聘','牛客','智联招聘','内推','LinkedIn']:[];
    suggest(more,'type',this.plugin.t('Role type'),types);
    if(this.market==='UK')pick(more,'sponsor',this.plugin.t('Visa sponsorship'),['Unknown','Yes','No']);
-   suggest(more,'source',this.plugin.t('Application source'),sources);text(more,'website',this.plugin.t('Job URL'));suggest(more,'track',this.plugin.t('Career track'),['Data / Analytics','Product','Technology','Finance / M&A','Strategy','Operations']);pick(more,'priority',this.plugin.t('Priority'),['High','Medium','Low']);suggest(more,'cv_version',this.plugin.t('CV version'),[]);
+   suggest(more,'source',this.plugin.t('Application source'),sources);text(more,'website',this.plugin.t('Job URL'));suggest(more,'track',this.plugin.t('Career track'),model.trackSuggestions(this.market,this.plugin.settings.language));pick(more,'priority',this.plugin.t('Priority'),['High','Medium','Low']);suggest(more,'cv_version',this.plugin.t('CV version'),[]);
   }
   const preparation=c.createDiv();
   new Setting(preparation).setName(r?this.plugin.t('Create preparation note if no valid note exists'):this.plugin.t('Create preparation note')).setDesc(this.plugin.t('Enable to save a job description and requirements with your preparation notes.')).addToggle(t=>t.setValue(data.detail).onChange(v=>{data.detail=v;fields.hidden=!v;}));

@@ -1,12 +1,8 @@
-Chinese and English interface support.
+Localize career-track suggestions.
 
-- Choose English or 中文 under Settings → Application Flow → Interface language.
-- Language preference is saved per vault; settings/dashboard update immediately.
-- Forms, buttons, command names, recruitment-stage labels, validation messages and summary counts are translated.
-- New preparation note headings follow the selected language; existing notes and user text are untouched.
-- Metadata keys and stored market/status/priority values remain stable for compatibility.
-- Free-text suggestions preserve their original wording.
+- China market now offers Chinese career tracks, regardless of interface language.
+- UK and Other use the selected interface language for built-in career tracks.
+- Known historical English or Chinese tracks are shown in the appropriate language in suggestions; custom values are preserved.
+- Existing database records are not rewritten.
 
-Replace main.js, manifest.json and styles.css in .obsidian/plugins/dgracy-application-flow/, preserve data.json, and reload the plugin. Reopen an existing form after changing language.
-
-Automated data, plugin loading, language persistence and mocked form tests pass. Native Obsidian desktop/mobile UI verification remains pending.
+Update Application Flow in Obsidian Community plugins, then disable and re-enable it or restart Obsidian. No data migration is needed.

@@ -43,4 +43,7 @@ function marketSubmission(market,draft) {
  if(market!=='UK')delete result.sponsor;
  delete result.region;return result;
 }
-module.exports={clean,today,validDate,records,duplicate,add,update,createDraft,marketSubmission};
+const TRACK_LABELS={'Data / Analytics':'数据分析','Product':'产品','Technology':'技术','Finance / M&A':'金融与并购','Strategy':'战略','Operations':'运营'};
+function trackSuggestion(value,market,language){const chinese=market==='China'||language==='zh';if(chinese)return TRACK_LABELS[value]||value;return Object.entries(TRACK_LABELS).find(([,label])=>label===value)?.[0]||value;}
+function trackSuggestions(market,language){return Object.keys(TRACK_LABELS).map(v=>trackSuggestion(v,market,language));}
+module.exports={trackSuggestion,trackSuggestions,clean,today,validDate,records,duplicate,add,update,createDraft,marketSubmission};
