@@ -1,8 +1,8 @@
-Localize career-track suggestions.
+Add built-in CV version suggestions.
 
-- China market now offers Chinese career tracks, regardless of interface language.
-- UK and Other use the selected interface language for built-in career tracks.
-- Known historical English or Chinese tracks are shown in the appropriate language in suggestions; custom values are preserved.
-- Existing database records are not rewritten.
+- China market or Chinese interface: 通用版、数据分析版、产品版、技术版、金融版、战略咨询版、运营版.
+- English interface for UK and Other: General, Data / Analytics, Product, Technology, Finance, Strategy / Consulting, Operations.
+- Existing CV-version values remain available as suggestions; any custom name can still be typed.
+- No existing application data is rewritten.
 
-Update Application Flow in Obsidian Community plugins, then disable and re-enable it or restart Obsidian. No data migration is needed.
+Update Application Flow and reload the plugin to use the new suggestions.

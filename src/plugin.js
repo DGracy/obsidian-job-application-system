@@ -49,7 +49,7 @@ class Form extends Modal {
    const sources=this.market==='UK'?['LinkedIn','Company Website','targetjobs','UCL Careers','Indeed','Referral']:this.market==='China'?['公司官网','Boss直聘','牛客','智联招聘','内推','LinkedIn']:[];
    suggest(more,'type',this.plugin.t('Role type'),types);
    if(this.market==='UK')pick(more,'sponsor',this.plugin.t('Visa sponsorship'),['Unknown','Yes','No']);
-   suggest(more,'source',this.plugin.t('Application source'),sources);text(more,'website',this.plugin.t('Job URL'));suggest(more,'track',this.plugin.t('Career track'),model.trackSuggestions(this.market,this.plugin.settings.language));pick(more,'priority',this.plugin.t('Priority'),['High','Medium','Low']);suggest(more,'cv_version',this.plugin.t('CV version'),[]);
+   suggest(more,'source',this.plugin.t('Application source'),sources);text(more,'website',this.plugin.t('Job URL'));suggest(more,'track',this.plugin.t('Career track'),model.trackSuggestions(this.market,this.plugin.settings.language));pick(more,'priority',this.plugin.t('Priority'),['High','Medium','Low']);suggest(more,'cv_version',this.plugin.t('CV version'),(this.market==='China'||this.plugin.settings.language==='zh')?['通用版','数据分析版','产品版','技术版','金融版','战略咨询版','运营版']:['General','Data / Analytics','Product','Technology','Finance','Strategy / Consulting','Operations']);
   }
   const preparation=c.createDiv();
   new Setting(preparation).setName(r?this.plugin.t('Create preparation note if no valid note exists'):this.plugin.t('Create preparation note')).setDesc(this.plugin.t('Enable to save a job description and requirements with your preparation notes.')).addToggle(t=>t.setValue(data.detail).onChange(v=>{data.detail=v;fields.hidden=!v;}));
